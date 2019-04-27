@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BitCamera</string>
+    <string name="save">บันทึก</string>
+    <string name="camera">กดเพื่อเลือกกล้อง</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="noti_channel_default">Primary Channel</string>
+    <string name="noti_channel_second">Secondary Channel</string>
+    <string name="default_ip_address">192.168.1.2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

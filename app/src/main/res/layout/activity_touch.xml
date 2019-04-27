@@ -1,0 +1,85 @@
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context="watcharaphans.bitcombine.co.th.bitcamera.TouchActivity"
+    tools:ignore="MergeRootFrame">
+
+    <watcharaphans.bitcombine.co.th.bitcamera.touch2focus.PreviewSurfaceView
+        android:id="@+id/preview_surface"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="4:3"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </watcharaphans.bitcombine.co.th.bitcamera.touch2focus.PreviewSurfaceView>
+
+    <watcharaphans.bitcombine.co.th.bitcamera.touch2focus.DrawingView
+        android:id="@+id/drawing_surface"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/preview_surface"
+        app:layout_constraintEnd_toEndOf="@+id/preview_surface"
+        app:layout_constraintStart_toStartOf="@+id/preview_surface"
+        app:layout_constraintTop_toTopOf="@+id/preview_surface">
+    </watcharaphans.bitcombine.co.th.bitcamera.touch2focus.DrawingView>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:background="@android:color/transparent"
+            android:text="กลับ"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+            android:id="@+id/btnFlash"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_flash_auto_white"
+            android:paddingBottom="8dp"
+            android:text="แฟลช"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageView
+            android:id="@+id/imvTakePhoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnFlash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBack"
+            app:srcCompat="@drawable/ic_camera"/>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

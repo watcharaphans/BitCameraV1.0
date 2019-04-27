@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:keepScreenOn="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Top Button-->
+    <LinearLayout
+        android:id="@+id/linearButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--Save-->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#008000"
+            android:text="@string/save"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/h1"
+            android:textStyle="bold" />
+        <!--Camera-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="#0055ff"
+            android:gravity="center"
+            android:text="@string/camera"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/h1"
+            android:textStyle="bold" />
+
+        <!--Cancle-->
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#f90a02"
+            android:text="@string/cancel"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/h1"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <!-- Layout Button Top-->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearButton">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeCamA"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintDimensionRatio="4:3"
+            app:layout_constraintEnd_toStartOf="@+id/RelativeCamB"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imvCameraA"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:background="#8b8b8b" />
+            <TextView
+                android:id="@+id/txtCameraA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                android:textColor="#ffffffff" />
+            <ImageView
+                android:id="@+id/imvCameraAnotAllow"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="centerInside"
+                android:padding="5dp"
+                android:src="@drawable/notallow"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeCamB"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintDimensionRatio="4:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imvCameraB"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:background="#8b8b8b" />
+            <TextView
+                android:id="@+id/txtCameraB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                android:textColor="#ffffffff" />
+            <ImageView
+                android:id="@+id/imvCameraBnotAllow"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="centerInside"
+                android:padding="5dp"
+                android:src="@drawable/notallow"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/RelativeCamC"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="2dp"
+            android:background="#8b8b8b"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="4:3"
+            app:layout_constraintEnd_toStartOf="@+id/RelativeCamD"
+            app:layout_constraintTop_toBottomOf="@+id/guideline">
+
+            <ImageView
+                android:id="@+id/imvCameraC"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:background="#8b8b8b"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/txtCameraC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textColor="#ffffffff"
+                android:textSize="40sp" />
+
+            <ImageView
+                android:id="@+id/imvCameraCnotAllow"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/notallow" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeCamD"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="4:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline">
+
+            <ImageView
+                android:id="@+id/imvCameraD"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#8b8b8b"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY" />
+            <TextView
+                android:id="@+id/txtCameraD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                android:textColor="#ffffffff" />
+            <ImageView
+                android:id="@+id/imvCameraDnotAllow"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="centerInside"
+                android:padding="5dp"
+                android:src="@drawable/notallow"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearResult"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/RelativeCamA"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!--Result QR Date & Time-->
+
+            <TextView
+                android:id="@+id/txtResult2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Mode Date/Time"
+                android:textAlignment="gravity"
+                android:textSize="26dp" />
+
+            <!--Result QR ID & Vehicle & Remarks-->
+
+            <ImageView
+                android:id="@+id/imvDash"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:src="@drawable/dotted"
+                android:layerType="software" />
+
+            <TextView
+                android:id="@+id/txtResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:text="Result"
+                android:textSize="@dimen/h1" />
+
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+
+
+    <!--Layout Result-->
+
+    <!--Layout Camera-->
+    <!--Layout Camera-->
+
+</android.support.constraint.ConstraintLayout>

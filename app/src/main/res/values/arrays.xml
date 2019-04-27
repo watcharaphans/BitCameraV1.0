@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_flash_values" >
+        <item>on</item>
+        <item>off</item>
+        <item>auto</item>
+    </string-array>
+
+    <string-array name="pref_flash_text" >
+        <item>เปิดแฟลช</item>
+        <item>ปิดแฟลช</item>
+        <item>แฟลชอัตโนมัติ</item>
+    </string-array>
+
+    <string-array name="pref_mode_values" >
+        <item>mode-in</item>
+        <item>mode-out</item>
+    </string-array>
+
+    <string-array name="pref_mode_text" >
+        <item>ถ่ายรูปขาเข้า</item>
+        <item>ถ่ายรูปขาออก</item>
+    </string-array>
+
+    <string-array name="pref_storage_values" >
+        <item>internal</item>
+        <item>external</item>
+    </string-array>
+
+    <string-array name="pref_storage_text" >
+        <item>อุปกรณ์</item>
+        <item>SD Card</item>
+    </string-array>
+
+    <string-array name="pref_quality_values" >
+        <item>100</item>
+        <item>95</item>
+        <item>90</item>
+        <item>85</item>
+        <item>80</item>
+        <item>75</item>
+        <item>70</item>
+    </string-array>
+
+    <string-array name="pref_quality_text" >
+        <item>100%</item>
+        <item>95%</item>
+        <item>90%</item>
+        <item>85%</item>
+        <item>80%</item>
+        <item>75%</item>
+        <item>70%</item>
+    </string-array>
+
+    <string-array name="pref_resolution_values" >
+        <item>1280x960</item>
+        <item>800x600</item>
+        <item>640x480</item>
+    </string-array>
+
+    <string-array name="pref_resolution_text" >
+        <item>1280 x 960</item>
+        <item>800 x 600</item>
+        <item>640 x 480</item>
+    </string-array>
+
+</resources>

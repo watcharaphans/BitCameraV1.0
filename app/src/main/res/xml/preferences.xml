@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <android.support.v7.preference.PreferenceCategory
+            android:title="ตั้งค่าทั่วไป">
+
+            <android.support.v7.preference.ListPreference
+                android:key="working_mode"
+                android:defaultValue="mode-in"
+                android:entries="@array/pref_mode_text"
+                android:entryValues="@array/pref_mode_values"
+                android:summary="ถ่ายรูปขาเข้า"
+                android:title="โหมดใช้งาน"/>
+
+            <android.support.v7.preference.EditTextPreference
+                android:defaultValue="@string/default_ip_address"
+                android:dialogMessage="IP bitVisitor"
+                android:key="edit_ip"
+                android:summary="@string/default_ip_address"
+                android:title="กำหนด IP Address Server"/>
+
+            <!--<android.support.v7.preference.ListPreference-->
+                <!--android:defaultValue="internal"-->
+                <!--android:entries="@array/pref_storage_text"-->
+                <!--android:entryValues="@array/pref_storage_values"-->
+                <!--android:key="images_store"-->
+                <!--android:summary="@array/pref_storage_text"-->
+                <!--android:title="ตำแหน่งจัดเก็บรูป"/>-->
+
+        </android.support.v7.preference.PreferenceCategory>
+
+        <android.support.v7.preference.PreferenceCategory
+            android:title="ตั้งค่ากล้อง">
+
+            <android.support.v7.preference.Preference
+                android:key="setting_camera"
+                android:summary="ตั้งค่ารูปภาพ"
+                android:title="ตั้งค่ารูปภาพ"/>
+
+            <android.support.v7.preference.CheckBoxPreference
+                android:key="cameraA"
+                android:title="เปิดใช้งานกล้อง A"
+                android:summary=""
+                android:defaultValue="false"/>
+
+            <android.support.v7.preference.CheckBoxPreference
+                android:key="cameraB"
+                android:title="เปิดใช้งานกล้อง B"
+                android:summary=""
+                android:defaultValue="false"/>
+
+            <android.support.v7.preference.CheckBoxPreference
+                android:key="cameraC"
+                android:title="เปิดใช้งานกล้อง C"
+                android:summary=""
+                android:defaultValue="true"/>
+
+            <android.support.v7.preference.CheckBoxPreference
+                android:key="cameraD"
+                android:title="เปิดใช้งานกล้อง D"
+                android:summary=""
+                android:defaultValue="true"/>
+        </android.support.v7.preference.PreferenceCategory>
+
+        <android.support.v7.preference.ListPreference
+            android:key="flash_mode"
+            android:defaultValue="auto"
+            android:entries="@array/pref_flash_text"
+            android:entryValues="@array/pref_flash_values"
+            android:summary="ตั้งค่าเริ่มต้นของสถานะแฟลช ให้เปิด, ปิด หรืออัตโนมัติ"
+            android:title="การตั้งค่าแฟลช"/>
+
+        <android.support.v7.preference.Preference
+            android:key="changePassword"
+            android:summary=""
+            android:title="เปลี่ยนรหัสผ่าน"/>
+
+        <android.support.v7.preference.Preference
+            android:key="about"
+            android:summary="รายละเอียดระบบ"
+            android:title="About"/>
+
+        <!--<android.support.v7.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="key1"
+            android:summary="Switch Summary"
+            android:title="Switch Preference"/>
+
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue="Default value"
+            android:dialogMessage="Dialog Message"
+            android:key="key2"
+            android:summary="EditText Summary"
+            android:title="EditText Preference"/>
+
+        <android.support.v7.preference.CheckBoxPreference
+            android:defaultValue="true"
+            android:key="key3"
+            android:summary="CheckBox Summary"
+            android:title="CheckBox Preference"/>-->
+
+
+</android.support.v7.preference.PreferenceScreen>

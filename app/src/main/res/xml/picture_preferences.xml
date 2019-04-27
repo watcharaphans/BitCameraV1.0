@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="ตั้งค่ารูปภาพ">
+
+        <android.support.v7.preference.ListPreference
+            android:key="image_quality"
+            android:defaultValue="95"
+            android:entries="@array/pref_quality_text"
+            android:entryValues="@array/pref_quality_values"
+            android:summary="คุณภาพของภาพถ่าย"
+            android:title="Image Quality"/>
+
+        <android.support.v7.preference.ListPreference
+            android:key="image_resolution"
+            android:defaultValue="640x480"
+            android:entries="@array/pref_resolution_text"
+            android:entryValues="@array/pref_resolution_values"
+            android:summary="ความละเอียดของภาพถ่าย"
+            android:title="Camera Resolution"/>
+
+        <android.support.v7.preference.CheckBoxPreference
+            android:key="view_pic"
+            android:defaultValue="true"
+            android:summary="ดูรูปภาพทันทีหลังจากกดถ่ายรูป"
+            android:title="ตรวจสอบรูปภาพ"/>
+
+        <android.support.v7.preference.CheckBoxPreference
+            android:key="stamp_datetime"
+            android:defaultValue="false"
+            android:summary=""
+            android:title="ประทับวันที่-เวลาบนรูปภาพ"/>
+
+    </android.support.v7.preference.PreferenceCategory>
+</android.support.v7.preference.PreferenceScreen>
