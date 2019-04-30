@@ -60,7 +60,7 @@ public class PreviewPicturesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // back to MainFragment
-                playSound("button");
+                //playSound("button");
                 Log.i(TAG, "--> Capture Done!!!");
                 setResult(RESULT_OK);
                 finish();
@@ -72,7 +72,7 @@ public class PreviewPicturesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Back to Open Camera
-                playSound("button");
+                //playSound("button");
                 Log.i(TAG, "--> Back Capture...");
                 setResult(RESULT_CANCELED);
                 finish();

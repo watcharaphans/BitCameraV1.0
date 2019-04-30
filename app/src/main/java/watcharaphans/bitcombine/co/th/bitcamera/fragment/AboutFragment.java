@@ -66,7 +66,7 @@ public class AboutFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.about_system, container, false);
+        return inflater.inflate(R.layout.fragment_about_system, container, false);
 
     }
 
@@ -172,7 +172,7 @@ public class AboutFragment extends Fragment {
 
         txtSerial.setText("Serial : " +getSerialNumber());
         Log.d(TAG, "SERIAL : " + getSerialNumber());
-
+//
 
         ConnectivityManager connManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo.State wifiInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();

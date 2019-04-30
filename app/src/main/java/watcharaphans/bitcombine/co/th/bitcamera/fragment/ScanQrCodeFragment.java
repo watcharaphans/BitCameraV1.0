@@ -29,7 +29,7 @@ public class ScanQrCodeFragment extends Fragment implements ZXingScannerView.Res
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (MainActivity) getActivity();
-        activity.setWorkingModeVisibility(true);
+        //activity.setWorkingModeVisibility(true);
         Log.d(TAG, "onAttach...");
     }
 

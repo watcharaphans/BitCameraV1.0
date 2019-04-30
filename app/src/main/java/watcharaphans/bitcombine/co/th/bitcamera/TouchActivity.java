@@ -71,7 +71,7 @@ public class TouchActivity extends AppCompatActivity
         flashButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playSound("button");
+                //playSound("button");
                 PopupMenu popup = new PopupMenu(TouchActivity.this, flashButton);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
@@ -83,15 +83,12 @@ public class TouchActivity extends AppCompatActivity
                         switch (item.getItemId()) {
                             case R.id.action_flash_on:
                                 setFlash("on");
-                                playSound("button");
                                 break;
                             case R.id.action_flash_off:
                                 setFlash("off");
-                                playSound("button");
                                 break;
                             case R.id.action_flash_auto:
                                 setFlash("auto");
-                                playSound("button");
                                 break;
                         }
                         return true;
@@ -106,7 +103,6 @@ public class TouchActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "---> Press Back");
-                playSound("button");
                 finish();
             }
         });

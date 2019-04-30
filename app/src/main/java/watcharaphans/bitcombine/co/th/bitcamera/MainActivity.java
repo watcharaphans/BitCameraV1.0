@@ -1,6 +1,8 @@
 package watcharaphans.bitcombine.co.th.bitcamera;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.app.admin.DevicePolicyManager;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
@@ -17,6 +19,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.hardware.Camera;
 import android.media.MediaPlayer;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -34,6 +37,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_NETWORK_STATE,
             Manifest.permission.ACCESS_WIFI_STATE,
+            Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
@@ -90,6 +95,13 @@ public class MainActivity extends AppCompatActivity
     private boolean isRegistered = false;
     PowerManager.WakeLock wakeLock;
     boolean checkFTP = false;
+    private int batteryStatus = 0;
+    public TextView txtStatusBattery;
+    private DevicePolicyManager devicePolicyManager;
+    private ActivityManager activityManager;
+    private ComponentName compName;
+    public static final int RESULT_ENABLE = 11;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +113,9 @@ public class MainActivity extends AppCompatActivity
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyApp::MyWakelockTag");
         wakeLock.acquire();
+
+        PreferenceManager.setDefaultValues(this,R.xml.preferences, false);
+        PreferenceManager.setDefaultValues(this,R.xml.picture_preferences,false);
 
         if (!hasPermissions(this, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)) {
             // Permission is not granted
@@ -114,15 +129,12 @@ public class MainActivity extends AppCompatActivity
             main();
         }
 
-        PreferenceManager.setDefaultValues(this,R.xml.preferences, false);
-        PreferenceManager.setDefaultValues(this,R.xml.picture_preferences,false);
-
         wifiImageView = (ImageView) findViewById(R.id.status_wifi);
         ImageView settingsImageView = (ImageView) findViewById(R.id.imvSettings);
         settingsImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playSound("button");
+
                 Intent intent = new Intent(MainActivity.this, PassScreenActivity.class);
                 intent.putExtra("key_password", "normal");
                 startActivity(intent);
@@ -138,10 +150,43 @@ public class MainActivity extends AppCompatActivity
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         registerReceiver(myReceiver, filter);
+
         isRegistered = true;
 
+        // Register BroadcastReceiver
+        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = this.registerReceiver(null, ifilter);
+
+        txtStatusBattery = (TextView) findViewById(R.id.txtBattery);
 
         //setWorkingModeVisibility(true);
+
+        devicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+        activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        compName = new ComponentName(this, MyAdmin.class);
+
+        Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, compName);
+        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Additional text explaining why we need this permission");
+        startActivityForResult(intent, RESULT_ENABLE);
+
+        LinearLayout linearLockScreen = (LinearLayout)findViewById(R.id.linearLockScreen);
+        linearLockScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                boolean active = devicePolicyManager.isAdminActive(compName);
+                Log.e(TAG,"------> [Click Lock Screen] : "+ active);
+                if (active) {
+                    devicePolicyManager.lockNow();
+                } else {
+                    Log.e(TAG,"You need to enable the Admin Device Features"+ active);
+                    //Toast.makeText(this, "You need to enable the Admin Device Features", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
 
     }  // Main Method
 
@@ -227,8 +272,7 @@ public class MainActivity extends AppCompatActivity
             public void onReceive(Context context, Intent intent) {
 
                 statusWifi = intent.getBooleanExtra("Key_StatusWifi",false);
-
-                Log.d(TAG,"------ [broadcastReceiver Wifi] == "+statusWifi);
+                Log.e(TAG,"------ [broadcastReceiver Wifi] == "+statusWifi);
 
                 if(statusWifi == true){
 
@@ -243,6 +287,9 @@ public class MainActivity extends AppCompatActivity
                     Log.d(TAG,"------ Wifi Disconnect == "+statusWifi);
                     wifiImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_circle_red));
                 }
+
+//                int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+//                Log.e(TAG,"------ Status Battery == "+ level);
 
                 // Start Check Wifi
 //                if(PicNum > 0 && statusWifi == true ){
@@ -271,14 +318,6 @@ public class MainActivity extends AppCompatActivity
 
         Log.d(TAG, "****** Start Thread Upload Service ******* ");
 
-        // จะ start ต่อเมื่อไม่ได้ต่อ wifi และเมื่อสามารถต่อ wifi ได้แล้วจะ auto ส่งรูปภาพด้วย service
-
-//        Log.e(TAG, ">>>>> Start Check >>>>> StatusWifi :" + statusWifi +" StatusUpload :"
-//                +statusUpload+ " Pic :"+ PicNum + " mIsBound :"+mIsBound);
-//
-//        if(statusWifi == true && statusUpload == false && PicNum > 0
-//                && mIsBound == true){
-
             Log.e(TAG, ">>>>> Start Bound Service picnum ="+PicNum);
 
             //picBalance = myBoundService.getProgress();
@@ -292,7 +331,11 @@ public class MainActivity extends AppCompatActivity
                     countPicture();
                     picBalance = PicNum;
                     checkFTP = myBoundService.checkConnFTP();
-                    Log.d(TAG,"###### Loop checkFTP :"+checkFTP +" ###### PIC :"+ picBalance + "######  Wifi:" + statusWifi);
+
+                    batteryStatus = getBatteryPercentage(getBaseContext());
+                    Log.d(TAG,"###### Loop checkFTP :"+checkFTP +" ###### PIC :"+ picBalance + "######  Wifi:" + statusWifi +
+                    "##### StatusUpload : " + statusUpload + " ##### Batt : "+batteryStatus);
+                    txtStatusBattery.setText(Integer.toString(batteryStatus));
 
                     // 1) Wifi = OK , FTP = OK , PicNum > 0
                     if(picBalance > 0 && checkFTP == true && statusWifi == true) { //&& checkFTP==true
@@ -324,8 +367,8 @@ public class MainActivity extends AppCompatActivity
                         statusUpload = false;
                         handler.postDelayed(this, 3000);
 
-                        //
-                    }else if(picBalance == 0 && checkFTP == false && statusWifi == true){
+                        // 4) Pic = 0 , FTP = false , Wifi = true
+                    }else if(statusWifi == true && picBalance == 0 && checkFTP == false ){
 
                         String tmpStr10 = String.valueOf(picBalance);
                         tv_countPic.setText(tmpStr10);
@@ -336,7 +379,9 @@ public class MainActivity extends AppCompatActivity
                         //Log.d(TAG,"***>> Check Thread : "+ myBoundService.checkThread());
                         //handler.removeCallbacks(this);
                         handler.postDelayed(this, 3000);
-                    }else if(picBalance > 0 && checkFTP == false && statusWifi == true && statusUpload == false){
+
+                        // [Start] เช็คว่ามีรูปภาพเพิ่มมาภายหลัง จะทำการ upload ใหม่
+                    }else if(statusWifi == true && picBalance > 0 && checkFTP == false &&  statusUpload == false){
 
                         Log.d(TAG, "****** [Start] Upload Service = " + picBalance+ " StatusUpload : " + statusUpload);
                         if(statusUpload){
@@ -346,9 +391,10 @@ public class MainActivity extends AppCompatActivity
 
                         handler.postDelayed(this, 3000);
 
+                        // [5]
                     }else{
 
-                        Log.d(TAG, "****** [5] Upload Service = " + picBalance+ " StatusUpload : " + statusUpload);
+                        Log.d(TAG, "****** [5] Upload Service = " + picBalance+ " StatusUpload : " + statusUpload + " Wifi :"+statusWifi);
                         handler.postDelayed(this, 3000);
                     }
                 }
@@ -370,26 +416,6 @@ public class MainActivity extends AppCompatActivity
             // playSound("save");
         }
     }
-//
-//    private void toggleUpdates(){
-//
-//
-//        Log.d(TAG,"***** toggleUpdates ");
-//        mBoundService.unPausePretendLongRunningTask();
-//
-//        if(mBoundService != null){
-//            if(mBoundService.getProgress() == mBoundService.getMaxValue()){
-//                mBoundService.resetTask();
-//                Log.d(TAG,"***** mBoundService.resetTask");
-//
-//            }else{
-//                mBoundService.unPausePretendLongRunningTask();
-//                Log.d(TAG,"***** mBoundService.unPausePretendLongRunningTask");
-//
-//            }
-//
-//        }
-//    }
 
     private void setObservers(){
         final Handler handler = new Handler();
@@ -510,22 +536,9 @@ public class MainActivity extends AppCompatActivity
                 if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
                     return false;
                 }
-
-//                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-//                    // TODO: Consider calling
-//                    //    ActivityCompat#requestPermissions
-//                    // here to request the missing permissions, and then overriding
-//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                    //                                          int[] grantResults)
-//                    // to handle the case where the user grants the permission. See the documentation
-//                    // for ActivityCompat#requestPermissions for more details.
-//                    return false;
-//                }
             }
         }
         return true;
-
-
     }
 
     public void main() {
@@ -791,28 +804,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void startLoopCountPic(){
-
-        final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
-
-            boolean checkFTP = false;
-            @Override
-            public void run() {
-                countPicture();
-                checkFTP = myBoundService.checkConnFTP();
-                Date currentTime = Calendar.getInstance().getTime();
-                Log.i(TAG, "---Start check status >>> " + currentTime);
-                Log.i(TAG, "---Start check Wifi >>> " + statusWifi);
-                Log.i(TAG, "---Start check FTP >>> " + checkFTP);
-
-                handler.postDelayed(this, 3000);
-            }
-        };
-        handler.postDelayed(runnable, 1000);
-
-    }
-
     private void playSound(String str) {
 
         MediaPlayer mp;
@@ -831,5 +822,18 @@ public class MainActivity extends AppCompatActivity
                 break;
 
         }
+    }
+
+    public static int getBatteryPercentage(Context context) {
+
+        IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = context.registerReceiver(null, iFilter);
+
+        int level = batteryStatus != null ? batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) : -1;
+        int scale = batteryStatus != null ? batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1) : -1;
+
+        float batteryPct = level / (float) scale;
+
+        return (int) (batteryPct * 100);
     }
 }  // Main class

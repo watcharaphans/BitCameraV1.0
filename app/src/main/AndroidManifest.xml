@@ -25,6 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <receiver
             android:name=".StartActivityOnBootReceiver"
             android:enabled="true">
@@ -47,6 +48,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".TouchActivity"
             android:screenOrientation="landscape"></activity>
@@ -56,6 +58,16 @@
         <activity android:name=".PreviewPicturesActivity"></activity>
 
         <service android:name=".service.MyBoundService" />
+
+        <receiver android:name=".MyAdmin" android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data android:name="android.app.device_admin"
+                android:resource="@xml/policies" />
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
+            </intent-filter>
+
+        </receiver>
 
         <!-- <service -->
         <!-- android:name=".service.UploadFilesService" -->

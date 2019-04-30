@@ -288,6 +288,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         // Create Directory
         //createFiles();
+        activity.setWorkingModeVisibility(false);
     }
 
     @Override
@@ -296,23 +297,18 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         Intent intent;
         switch (viewId) {
             case R.id.imvCameraA:
-                playSound("button");
                 mListener.onClickCameraImageA();
                 break;
             case R.id.imvCameraB:
-                playSound("button");
                 mListener.onClickCameraImageB();
                 break;
             case R.id.imvCameraC:
-                playSound("button");
                 mListener.onClickCameraImageC();
                 break;
             case R.id.imvCameraD:
-                playSound("button");
                 mListener.onClickCameraImageD();
                 break;
             case R.id.btnCancel:
-                playSound("button");
                 getActivity()
                         .getSupportFragmentManager()
                         .popBackStack();
@@ -554,7 +550,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
         // Fragment ผูกเข้ากับ Activity
         activity = (MainActivity) getActivity();
-        activity.setWorkingModeVisibility(false); // ซ่อนแทบ mode IN/OUT
+  //      activity.setWorkingModeVisibility(false); // ซ่อนแทบ mode IN/OUT
     }
 
     public interface MainFragmentListener {

@@ -49,7 +49,7 @@ public class PassScreenActivity extends AppCompatActivity implements View.OnClic
         backSpaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playSound("button");
+//                playSound("button");
                 String currentInput = mPassCodeTextView.getText().toString();
                 if (currentInput.length() > 0) {
                     // ลบตัวขวาสุดทิ้ง
@@ -62,7 +62,7 @@ public class PassScreenActivity extends AppCompatActivity implements View.OnClic
         cancelButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                playSound("button");
+
                 finish();
             }
         });
@@ -116,7 +116,6 @@ public class PassScreenActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        playSound("button");
         String currentInput = mPassCodeTextView.getText().toString();
         if (currentInput.length() < 4) {
             // ใช้ตัวเลขที่เป็น text บนปุ่ม
