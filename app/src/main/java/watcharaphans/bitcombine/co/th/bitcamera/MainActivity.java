@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity
                     batteryStatus = getBatteryPercentage(getBaseContext());
                     Log.d(TAG,"###### Loop checkFTP :"+checkFTP +" ###### PIC :"+ picBalance + "######  Wifi:" + statusWifi +
                     "##### StatusUpload : " + statusUpload + " ##### Batt : "+batteryStatus);
-                    txtStatusBattery.setText(Integer.toString(batteryStatus));
+                    txtStatusBattery.setText(Integer.toString(batteryStatus) + "%");
 
                     // 1) Wifi = OK , FTP = OK , PicNum > 0
                     if(picBalance > 0 && checkFTP == true && statusWifi == true) { //&& checkFTP==true

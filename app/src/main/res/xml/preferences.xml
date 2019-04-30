@@ -18,7 +18,7 @@
                 android:dialogMessage="IP bitVisitor"
                 android:key="edit_ip"
                 android:summary="@string/default_ip_address"
-                android:title="กำหนด IP Address Server"/>
+                android:title="กำหนด IP Address bitVisitor"/>
 
             <!--<android.support.v7.preference.ListPreference-->
                 <!--android:defaultValue="internal"-->
